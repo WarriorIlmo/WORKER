@@ -227,6 +227,69 @@
             background: linear-gradient(to right, #8B0000, #b22222);
             margin: 0.5rem auto 0;
         }
+        /* Flexible form container with smooth height transitions */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Form wrapper for smooth transitions */
+        .form-wrapper {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        /* Smooth form fade and scale transitions */
+        [x-cloak] { display: none; }
+        .form-fade-in {
+            animation: formFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .form-fade-out {
+            animation: formFadeOut 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes formFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes formFadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+        }
+        /* Logo section stays fixed and doesn't move */
+        .logo-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: none;
+            will-change: auto;
+            flex-shrink: 0;
+        }
+        /* Auth card with smooth layout */
+        .auth-card-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: none;
+            will-change: auto;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-polish-static text-[#1b1b18] relative overflow-x-hidden">
@@ -282,7 +345,7 @@
     <div class="relative z-10 min-h-screen flex flex-col md:flex-row">
 
         {{-- Branding / logo section (left on desktop, top on mobile) --}}
-        <section class="flex-1 flex flex-col items-center justify-center px-6 py-8 lg:p-12">
+        <section class="logo-section px-6 py-8 lg:p-12">
             <div class="max-w-xs text-center">
               <!--  <div class="inline-flex items-center justify-center p-3 mb-4 rounded-2xl bg-white shadow-lg shadow-red-900/10 ring-1 ring-red-100">
                     <img src="{{ asset('images/ml2.png') }}" alt="Brand logo" class="w-20 sm:w-24 h-auto mx-auto"/>
@@ -295,11 +358,19 @@
         </section>
 
         {{-- Authentication card (right on desktop, bottom on mobile) --}}
-        <section class="flex-1 flex items-center justify-center px-4 py-6 sm:px-6 lg:p-12">
+        <section class="auth-card-container px-4 py-6 sm:px-6 lg:p-12">
             <div class="w-full max-w-sm auth-card rounded-2xl">
+                <div class="form-container" :style="form === 'login' ? { height: 'auto', minHeight: '380px' } : { height: 'auto', minHeight: '600px' }">
 
                 {{-- ============ LOGIN FORM ============ --}}
-                <div x-show="form === 'login'" x-transition.opacity.duration.300ms class="p-6 sm:p-7 space-y-4">
+                <div x-show="form === 'login'" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 transform scale-95"
+                     x-transition:enter-end="opacity-100 transform scale-100"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 transform scale-100"
+                     x-transition:leave-end="opacity-0 transform scale-95"
+                     class="p-6 sm:p-7 space-y-4 absolute inset-0">
                     <div class="text-center">
                         <h2 class="text-xl font-bold text-[#8B0000]">Welcome Back</h2>
                         <p class="text-xs text-gray-500 mt-0.5">Sign in to your account</p>
@@ -356,7 +427,14 @@
                 </div>
 
                 {{-- ============ REGISTER FORM (compact) ============ --}}
-                <div x-show="form === 'register'" x-transition.opacity.duration.300ms class="p-6 sm:p-7 space-y-3" style="display:none;">
+                <div x-show="form === 'register'" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 transform scale-95"
+                     x-transition:enter-end="opacity-100 transform scale-100"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 transform scale-100"
+                     x-transition:leave-end="opacity-0 transform scale-95"
+                     class="p-6 sm:p-7 space-y-3 absolute inset-0" style="display:none;">
                     <div class="text-center">
                         <h2 class="text-xl font-bold text-[#8B0000]">Create Your Account</h2>
                         <p class="text-xs text-gray-500 mt-0.5">Get started in seconds</p>
@@ -450,6 +528,7 @@
                     </p>
                 </div>
 
+                </div>
             </div>
         </section>
     </div>
