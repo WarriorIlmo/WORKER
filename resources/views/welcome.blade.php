@@ -114,7 +114,7 @@
         .field-input {
             display: block;
             width: 100%;
-            padding: 0.6rem 0.75rem 0.6rem 2.25rem;
+            padding: 0.5rem 0.75rem 0.5rem 2.25rem;
             font-size: 0.8rem;
             color: #1b1b18;
             background-color: #ffffff;
@@ -138,10 +138,10 @@
         }
         .field-label {
             display: block;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             font-weight: 600;
             color: #4b4b48;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
             letter-spacing: 0.01em;
         }
         /* Input icon positioning */
@@ -173,7 +173,7 @@
         /* Primary action button */
         .btn-primary {
             width: 100%;
-            padding: 0.65rem 1rem;
+            padding: 0.55rem 1rem;
             font-size: 0.82rem;
             font-weight: 600;
             color: #ffffff;
@@ -225,7 +225,7 @@
             height: 3px;
             border-radius: 9999px;
             background: linear-gradient(to right, #8B0000, #b22222);
-            margin: 0.5rem auto 0;
+            margin: 0.35rem auto 0;
         }
         /* Flexible form container with smooth height transitions */
         .form-container {
@@ -360,7 +360,7 @@
         {{-- Authentication card (right on desktop, bottom on mobile) --}}
         <section class="auth-card-container px-4 py-6 sm:px-6 lg:p-12">
             <div class="w-full max-w-sm auth-card rounded-2xl">
-                <div class="form-container" :style="form === 'login' ? { height: 'auto', minHeight: '380px' } : { height: 'auto', minHeight: '600px' }">
+                <div class="form-container" :style="form === 'login' ? { height: 'auto', minHeight: '360px' } : { height: 'auto', minHeight: '500px' }">
 
                 {{-- ============ LOGIN FORM ============ --}}
                 <div x-show="form === 'login'" 
@@ -370,15 +370,15 @@
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-95"
-                     class="p-6 sm:p-7 space-y-4 absolute inset-0">
+                     class="p-5 sm:p-6 space-y-3 absolute inset-0">
                     <div class="text-center">
-                        <h2 class="text-xl font-bold text-[#8B0000]">Welcome Back</h2>
+                        <h2 class="text-lg font-bold text-[#8B0000]">Welcome Back</h2>
                         <p class="text-xs text-gray-500 mt-0.5">Sign in to your account</p>
                         <div class="heading-divider"></div>
                     </div>
                     <form method="POST" action="{{ Route::has('login') ? route('login') : '/login' }}">
                         @csrf
-                        <div class="space-y-3">
+                        <div class="space-y-2.5">
                             {{-- Email --}}
                             <div>
                                 <label class="field-label">Email</label>
@@ -434,15 +434,15 @@
                      x-transition:leave="transition ease-in duration-300"
                      x-transition:leave-start="opacity-100 transform scale-100"
                      x-transition:leave-end="opacity-0 transform scale-95"
-                     class="p-6 sm:p-7 space-y-3 absolute inset-0" style="display:none;">
+                     class="p-5 sm:p-6 space-y-2 absolute inset-0" style="display:none;">
                     <div class="text-center">
-                        <h2 class="text-xl font-bold text-[#8B0000]">Create Your Account</h2>
+                        <h2 class="text-lg font-bold text-[#8B0000]">Create Your Account</h2>
                         <p class="text-xs text-gray-500 mt-0.5">Get started in seconds</p>
                         <div class="heading-divider"></div>
                     </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="space-y-2.5">
+                        <div class="space-y-2">
                             {{-- Full name --}}
                             <div>
                                 <label class="field-label">Full Name</label>
